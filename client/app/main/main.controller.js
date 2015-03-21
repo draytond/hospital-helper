@@ -2,26 +2,26 @@
 
 angular.module('hospitalHelperApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+    $scope.tasks = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-      socket.syncUpdates('thing', $scope.awesomeThings);
+    $http.get('/api/tasks').success(function(receivedTasks) {
+      $scope.tasks = receivedTasks;
+      socket.syncUpdates('task', $scope.tasks);
     });
 
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
+    $scope.addTask = function() {
+      if($scope.newTask === '') {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+      $http.post('/api/tasks', { name: $scope.newTask });
+      $scope.newTask = '';
     };
 
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+    $scope.deleteTask = function(task) {
+      $http.delete('/api/tasks/' + task._id);
     };
 
     $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('task');
     });
   });
