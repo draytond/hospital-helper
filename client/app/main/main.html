@@ -18,7 +18,7 @@
     </form>
   </div>
   <div class="row reg-sec">
-    <p>No username? <button class="btn btn-md btn-default" ng-click="toggleReg()">Register</button></p>
+    <p>{{registerPrompt}} <button class="btn btn-md btn-default" ng-click="toggleReg()">{{registerBtnTxt}}</button></p>
     <form name="regForm" class="form-register col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : !regOpen}">
       <h2>Welcome!</h2>
       <label for="inputRegName" class="sr-only">Your name</label>
@@ -58,7 +58,7 @@
         <label for="radio-patient" class="radio-inline">Patient</label>
       </div>
 
-      <div class="patient-options" ng-hide="newUser.role === 'patient'">
+      <div class="patient-options" ng-class="{'hide-sec' : newUser.role === 'staff'}">
         <label for="patient-doctor">Who is your doctor?</label>
         <select
           ng-model="newUser.patientDoctor"
@@ -83,25 +83,28 @@
         <input
           ng-model="newUser.patientRoom"
           type="number"
+          name="roomnumber"
           id="patient-room"
           class="form-control"
           min="1"
           placeholder="Room number"
           ng-required="newUser.role === 'patient'">
       </div>
-      <div class="staff-options" ng-hide="newUser.role === 'staff'">
+      <div
+        class="staff-options"
+        ng-class="{'hide-sec' : newUser.role === 'patient'}">
       <label for="position">What is your position?</label>
         <select
           ng-model="newUser.position"
           ng-required="newUser.role === 'staff'"
           id="position"
+          name="position"
           class="form-control">
           <option value="doctor">Doctor</option>
-          <option value="doctor">Nurse</option>
-          <option value="doctor">Floor staff</option>
+          <option value="nurse">Nurse</option>
+          <option value="floor staff">Floor staff</option>
         </select>
       </div>
-
       <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="regForm.$invalid">Register</button>
     </form>
   </div>

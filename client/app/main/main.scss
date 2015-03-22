@@ -2,11 +2,28 @@
     margin: 20px 0;
 }
 
-.hide-signin-add, .hide-signin-remove {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+.staff-options {
+  height: 58px;
+  opacity: 1;
+  margin-bottom: 15px;
+}
+
+.patient-options {
+  height: 190px;
+  opacity: 1;
+}
+
+.patient-options.hide-sec-add,
+.patient-options.hide-sec-remove,
+.staff-options.hide-sec-add,
+.staff-options.hide-sec-remove,
+.hide-signin-add,
+.hide-signin-remove {
+  -webkit-transition:all cubic-bezier(0.1, 0.2, 0.2, 0.4) 0.9s;
+  -moz-transition:all cubic-bezier(0.1, 0.2, 0.2, 0.4) 0.9s;
+  -o-transition:all cubic-bezier(0.1, 0.2, 0.2, 0.4) 0.9s;
+  transition:all cubic-bezier(0.1, 0.2, 0.2, 0.4) 0.9s;
+  overflow: hidden;
 }
 
 #banner {
@@ -27,6 +44,10 @@ input, button {
 form {
   float: none;
   margin: 0 auto;
+
+  &.form-register {
+    height: 472px;
+  }
 }
 
 .form-signin {
@@ -35,14 +56,18 @@ form {
   overflow: hidden;
 }
 
+.form-register.hide-signin-add,
+.patient-options.hide-sec,
+.staff-options.hide-sec,
 .hide-signin,
+.hide-sec,
 .hide-signin-add.hide-signin-add-active {
   height: 0px;
   opacity: 0;
+  overflow: hidden;
 }
 
 .hide-signin-remove.hide-signin-remove-active {
-  height: 100px;
   opacity: 1;
 }
 

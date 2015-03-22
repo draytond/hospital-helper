@@ -4,6 +4,11 @@ angular.module('hospitalHelperApp')
   .controller('MainCtrl', function ($scope, $http, socket) {
     $scope.tasks = [];
     $scope.regOpen = false;
+    $scope.newUser = {
+      role: 'patient'
+    };
+    $scope.registerPrompt = 'No username?';
+    $scope.registerBtnTxt = 'Register';
 
     $http.get('/api/tasks').success(function(receivedTasks) {
       $scope.tasks = receivedTasks;
@@ -68,6 +73,16 @@ angular.module('hospitalHelperApp')
 
     $scope.toggleReg = function() {
       $scope.regOpen = !$scope.regOpen;
+      if ($scope.registerPrompt === 'No username?') {
+        $scope.registerPrompt = 'Already registered?';
+      } else {
+        $scope.registerPrompt = 'No username?';
+      }
+      if ($scope.registerBtnTxt === 'Register') {
+        $scope.registerBtnTxt = 'Login';
+      } else {
+        $scope.registerBtnTxt = 'Register';
+      }
     };
 
     $scope.$on('$destroy', function () {
