@@ -3,6 +3,7 @@
 angular.module('hospitalHelperApp', [
   'ngCookies',
   'ngResource',
+  'ngAnimate',
   'ngSanitize',
   'btford.socket-io',
   'ui.router',

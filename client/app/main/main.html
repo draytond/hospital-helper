@@ -10,21 +10,32 @@
 
 <div class="container">
   <div class="row">
-    <form class="form-signin col-md-4 col-lg-4 col-sm-6">
+    <form class="form-signin col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : regOpen}">
       <h2>Please sign in</h2>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Username" required="" autofocus="">
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
+      <label for="inputUser" class="sr-only">Username</label>
+      <input type="text" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
   </div>
-  <div class="row">
+  <div class="row reg-sec">
+    <p>No username? <button class="btn btn-md btn-secondary" ng-click="toggleReg()">Register</button></p>
+    <form class="form-register col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : !regOpen}">
+      <h2>Welcome - who are you?</h2>
+      <label for="inputRegName" class="sr-only">Your name</label>
+      <input type="text" id="inputRegName" class="form-control" placeholder="Your name" required="" autofocus="">
+      <label for="inputRegUser" class="sr-only">Desired username</label>
+      <input type="text" id="inputRegUser" class="form-control" placeholder="Username" required="" autofocus="">
+      I am a:
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="radioPatient" value="radioPatient">Patient
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="radioStaff" value="radioStaff">Staff member
+      </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+  </div>
+  <!-- <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Features:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="task in tasks">
@@ -41,13 +52,12 @@
         <button type="submit" class="btn btn-primary" ng-click="addTask()">Add New</button>
       </span>
     </p>
-  </form>
+  </form> -->
 </div>
-
+<!--
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+      <p>David Drayton</p>
   </div>
 </footer>
+ -->
