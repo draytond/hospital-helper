@@ -23,7 +23,7 @@
       <h2>Welcome!</h2>
       <label for="inputRegName" class="sr-only">Your name</label>
       <input
-        ng-model="newUser.regName"
+        ng-model="newUser.name"
         type="text"
         id="inputRegName"
         class="form-control"
@@ -31,7 +31,7 @@
         required />
       <label for="inputRegUser" class="sr-only">Desired username</label>
       <input
-        ng-model="newUser.regUsername"
+        ng-model="newUser.username"
         type="text"
         id="inputRegUser"
         class="form-control"
@@ -61,27 +61,27 @@
       <div class="patient-options" ng-class="{'hide-sec' : newUser.role === 'staff'}">
         <label for="patient-doctor">Who is your doctor?</label>
         <select
-          ng-model="newUser.patientDoctor"
+          ng-model="newUser.doctor"
           ng-required="newUser.role === 'patient'"
           id="patient-doctor"
           class="form-control">
-          <option value="{{user.name}}" ng-repeat="user in users | filter:'doctor'">
-            {{user.name}}
+          <option value="{{doctor._id}}" ng-repeat="doctor in users | filter:'doctor'">
+            {{doctor.name}}
           </option>
         </select>
         <label for="patient-nurse">Who is your nurse?</label>
         <select
-          ng-model="newUser.patientNurse"
+          ng-model="newUser.nurse"
           ng-required="newUser.role === 'patient'"
           id="patient-nurse"
           class="form-control">
-          <option value="{{user.name}}" ng-repeat="user in users | filter:'nurse'">
-            {{user.name}}
+          <option value="{{nurse._id}}" ng-repeat="nurse in users | filter:'nurse'">
+            {{nurse.name}}
           </option>
         </select>
         <label for="patient-room" class="sr-only">Room number</label>
         <input
-          ng-model="newUser.patientRoom"
+          ng-model="newUser.room"
           type="number"
           name="roomnumber"
           id="patient-room"
@@ -105,7 +105,11 @@
           <option value="floor staff">Floor staff</option>
         </select>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="regForm.$invalid">Register</button>
+      <button
+        class="btn btn-lg btn-primary btn-block"
+        type="submit"
+        ng-disabled="regForm.$invalid"
+        ng-click="registerUser(newUser)">Register</button>
     </form>
   </div>
   <!-- <div class="row">
