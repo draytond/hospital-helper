@@ -50,13 +50,27 @@ form {
   margin-top: 15px;
   text-align: center;
 
-  button {
-    color: white;
-  }
-
   form {
     margin: 0 auto;
     float: none;
+
+    p {
+      font-weight: bold;
+    }
+
+    input, select {
+      margin-bottom: 15px;
+    }
+
+    .choose-type {
+      label {
+        padding-left: 10px;
+
+        &:first-of-type {
+          margin-right: 20px;
+        }
+      }
+    }
   }
 }
 

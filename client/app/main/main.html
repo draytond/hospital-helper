@@ -10,29 +10,99 @@
 
 <div class="container">
   <div class="row">
-    <form class="form-signin col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : regOpen}">
+    <form name="signinForm" class="form-signin col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : regOpen}">
       <h2>Please sign in</h2>
       <label for="inputUser" class="sr-only">Username</label>
-      <input type="text" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <input ng-model="loginUsername" name="username" type="text" id="inputUser" class="form-control" placeholder="Username" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="signinForm.$invalid">Sign in</button>
     </form>
   </div>
   <div class="row reg-sec">
-    <p>No username? <button class="btn btn-md btn-secondary" ng-click="toggleReg()">Register</button></p>
-    <form class="form-register col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : !regOpen}">
-      <h2>Welcome - who are you?</h2>
+    <p>No username? <button class="btn btn-md btn-default" ng-click="toggleReg()">Register</button></p>
+    <form name="regForm" class="form-register col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : !regOpen}">
+      <h2>Welcome!</h2>
       <label for="inputRegName" class="sr-only">Your name</label>
-      <input type="text" id="inputRegName" class="form-control" placeholder="Your name" required="" autofocus="">
+      <input
+        ng-model="newUser.regName"
+        type="text"
+        id="inputRegName"
+        class="form-control"
+        placeholder="Your name"
+        required />
       <label for="inputRegUser" class="sr-only">Desired username</label>
-      <input type="text" id="inputRegUser" class="form-control" placeholder="Username" required="" autofocus="">
-      I am a:
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" id="radioPatient" value="radioPatient">Patient
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" id="radioStaff" value="radioStaff">Staff member
-      </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <input
+        ng-model="newUser.regUsername"
+        type="text"
+        id="inputRegUser"
+        class="form-control"
+        placeholder="Username"
+        required />
+
+      <div class="choose-type">
+        <p>I am a:</p>
+        <input
+          ng-model="newUser.role"
+          required
+          name="user-type"
+          type="radio"
+          id="radio-staff"
+          value="staff" />
+        <label for="radio-staff" class="radio-inline">Staff member</label>
+        <input
+          ng-model="newUser.role"
+          required
+          name="user-type"
+          type="radio"
+          id="radio-patient"
+          value="patient" />
+        <label for="radio-patient" class="radio-inline">Patient</label>
+      </div>
+
+      <div class="patient-options" ng-hide="newUser.role === 'patient'">
+        <label for="patient-doctor">Who is your doctor?</label>
+        <select
+          ng-model="newUser.patientDoctor"
+          ng-required="newUser.role === 'patient'"
+          id="patient-doctor"
+          class="form-control">
+          <option value="{{user.name}}" ng-repeat="user in users | filter:'doctor'">
+            {{user.name}}
+          </option>
+        </select>
+        <label for="patient-nurse">Who is your nurse?</label>
+        <select
+          ng-model="newUser.patientNurse"
+          ng-required="newUser.role === 'patient'"
+          id="patient-nurse"
+          class="form-control">
+          <option value="{{user.name}}" ng-repeat="user in users | filter:'nurse'">
+            {{user.name}}
+          </option>
+        </select>
+        <label for="patient-room" class="sr-only">Room number</label>
+        <input
+          ng-model="newUser.patientRoom"
+          type="number"
+          id="patient-room"
+          class="form-control"
+          min="1"
+          placeholder="Room number"
+          ng-required="newUser.role === 'patient'">
+      </div>
+      <div class="staff-options" ng-hide="newUser.role === 'staff'">
+      <label for="position">What is your position?</label>
+        <select
+          ng-model="newUser.position"
+          ng-required="newUser.role === 'staff'"
+          id="position"
+          class="form-control">
+          <option value="doctor">Doctor</option>
+          <option value="doctor">Nurse</option>
+          <option value="doctor">Floor staff</option>
+        </select>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="regForm.$invalid">Register</button>
     </form>
   </div>
   <!-- <div class="row">

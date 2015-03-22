@@ -10,6 +10,50 @@ angular.module('hospitalHelperApp')
       socket.syncUpdates('task', $scope.tasks);
     });
 
+    $scope.users = [
+      {
+        name: 'Jake Williamson',
+        role: 'staff',
+        position: 'doctor'
+      },{
+        name: 'Marcia Williams',
+        role: 'staff',
+        position: 'nurse'
+      },{
+        name: 'David Fei',
+        role: 'patient',
+        room: 3
+      },{
+        name: 'Elizabeth Drayton',
+        role: 'staff',
+        position: 'doctor'
+      },{
+        name: 'Mary Lane',
+        role: 'patient',
+        room: 14
+      },{
+        name: 'Theresa Garcia',
+        role: 'staff',
+        position: 'nurse'
+      },{
+        name: 'Joe Szlosek',
+        role: 'patient',
+        room: 34
+      },{
+        name: 'Blue Johnson',
+        role: 'staff',
+        position: 'nurse'
+      },{
+        name: 'Harry Olson',
+        role: 'patient',
+        room: 12
+      },{
+        name: 'Jerry Kent',
+        role: 'staff',
+        position: 'floor staff'
+      }
+    ];
+
     $scope.addTask = function() {
       if($scope.newTask === '') {
         return;
