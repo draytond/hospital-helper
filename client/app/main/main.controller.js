@@ -34,8 +34,21 @@ angular.module('hospitalHelperApp')
     };
 
     $scope.registerUser = function(user) {
-      $http.post('/api/users', user);
-      $scope.toggleReg();
+      $http.post('/api/users', user).
+      success(function(data, status, headers, config) {
+        console.log('success: ', data);
+        if ($scope.alreadyExists) {
+          $scope.alreadyExists = false;
+        }
+        // go to logged-in side of site
+      }).
+      error(function(data, status, headers, config) {
+        // username field has unique index in MongoDB, so you'll get an
+        // error if you try to enter a username that
+        // already exists in the database
+        $scope.alreadyExists = true;
+      });
+      //$scope.toggleReg();
     };
 
     $scope.toggleReg = function() {
