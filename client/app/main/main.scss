@@ -81,6 +81,13 @@ form {
 
     p {
       font-weight: bold;
+
+      &.bg-danger {
+        border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        padding: 4px;
+      }
     }
 
     input, select {

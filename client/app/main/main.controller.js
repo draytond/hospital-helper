@@ -33,22 +33,44 @@ angular.module('hospitalHelperApp')
       $http.delete('/api/tasks/' + task._id);
     };
 
-    $scope.registerUser = function(user) {
-      $http.post('/api/users', user).
-      success(function(data, status, headers, config) {
-        console.log('success: ', data);
-        if ($scope.alreadyExists) {
-          $scope.alreadyExists = false;
-        }
-        // go to logged-in side of site
-      }).
-      error(function(data, status, headers, config) {
-        // username field has unique index in MongoDB, so you'll get an
-        // error if you try to enter a username that
-        // already exists in the database
-        $scope.alreadyExists = true;
+    $scope.login = function(username) {
+      $http.get('/api/users/' + username)
+        .success(function(receivedUser) {
+          if(receivedUser) {
+            console.log(username + ' exists...logging in!');
+          }
+          $scope.usernameExists = false;
+          $scope.usernameNotFound = false;
+      }).error(function(error) {
+        $scope.usernameNotFound = true;
+        console.log(username + ' not found... pop up error');
       });
-      //$scope.toggleReg();
+    };
+
+    $scope.registerUser = function(user) {
+      $http.get('/api/users/' + user.username)
+        .success(function(receivedUser) {  // username already exists
+          if(receivedUser) {
+            console.log('username already exists...');
+            $scope.alreadyExists = true;
+          }
+      }).error(function(error) { // proceed to register user
+        console.log('in error block...');
+        console.log(error);
+        if(error === 'Not Found') {
+          console.log('in "not found" block...about to POST');
+          $http.post('/api/users', user)
+            .success(function(data, status, headers, config) {
+              console.log('successfully POSTed: ', data);
+              if ($scope.alreadyExists) {
+                $scope.alreadyExists = false;
+              }
+              // display the login form without the registration form
+              $scope.toggleReg();
+            })
+          };
+        }
+      )
     };
 
     $scope.toggleReg = function() {
