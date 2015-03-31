@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hospitalHelperApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  .controller('MainCtrl', function ($scope, $http, $state, socket) {
     $scope.tasks = [];
     $scope.users = [];
     $scope.regOpen = false;
@@ -38,6 +38,11 @@ angular.module('hospitalHelperApp')
         .success(function(receivedUser) {
           if(receivedUser) {
             console.log(username + ' exists...logging in!');
+            if(receivedUser.role === 'patient') {
+              $state.go("patient", {}, { location: false } );
+            } else {
+              $state.go("staff", {}, { location: false } );
+            }
           }
           $scope.usernameExists = false;
           $scope.usernameNotFound = false;
