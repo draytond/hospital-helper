@@ -71,6 +71,24 @@ form {
   opacity: 1;
 }
 
+.side-rails {
+  padding: 0 15px 0 15px;
+}
+
+.bg-danger {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  padding: 4px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.centered {
+  margin: 0 auto;
+  float: none;
+}
+
 .reg-sec {
   margin-top: 15px;
   text-align: center;
@@ -81,13 +99,6 @@ form {
 
     p {
       font-weight: bold;
-
-      &.bg-danger {
-        border-radius: 5px;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        padding: 4px;
-      }
     }
 
     input, select {

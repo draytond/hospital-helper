@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('hospitalHelperApp')
-  .controller('MainCtrl', function ($scope, $http, $state, socket) {
-    $scope.tasks = [];
+  .controller('MainCtrl', function ($scope, $http, $state, $rootScope, socket) {
     $scope.users = [];
     $scope.regOpen = false;
     $scope.newUser = {
@@ -11,32 +10,16 @@ angular.module('hospitalHelperApp')
     $scope.registerPrompt = 'No username?';
     $scope.registerBtnTxt = 'Register';
 
-    $http.get('/api/tasks').success(function(receivedTasks) {
-      $scope.tasks = receivedTasks;
-      socket.syncUpdates('task', $scope.tasks);
-    });
-
     $http.get('/api/users').success(function(receivedUsers) {
       $scope.users = receivedUsers;
       socket.syncUpdates('user', $scope.users);
     });
 
-    $scope.addTask = function() {
-      if($scope.newTask === '') {
-        return;
-      }
-      $http.post('/api/tasks', { name: $scope.newTask });
-      $scope.newTask = '';
-    };
-
-    $scope.deleteTask = function(task) {
-      $http.delete('/api/tasks/' + task._id);
-    };
-
     $scope.login = function(username) {
       $http.get('/api/users/' + username)
         .success(function(receivedUser) {
           if(receivedUser) {
+            $rootScope.user = receivedUser;
             console.log(username + ' exists...logging in!');
             if(receivedUser.role === 'patient') {
               $state.go("patient", {}, { location: false } );
@@ -79,6 +62,7 @@ angular.module('hospitalHelperApp')
     };
 
     $scope.toggleReg = function() {
+      $scope.usernameNotFound = false;
       $scope.regOpen = !$scope.regOpen;
       if ($scope.registerPrompt === 'No username?') {
         $scope.registerPrompt = 'Already registered?';
