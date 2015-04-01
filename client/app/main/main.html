@@ -9,7 +9,7 @@
 
 <div class="container">
   <div class="row">
-    <form name="signinForm" class="form-signin col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : regOpen}">
+    <form name="signinForm" class="form-signin col-sm-4" ng-class="{'hide-signin' : regOpen}">
       <h2>Please sign in</h2>
       <label for="inputUser" class="sr-only">Username</label>
       <input ng-model="loginUsername" name="username" type="text" id="inputUser" class="form-control" placeholder="Username" required>
@@ -21,13 +21,13 @@
     </form>
   </div>
   <div class="row">
-    <div class="col-md-4 col-lg-4 col-sm-6 centered">
+    <div class="col-sm-4 centered">
       <p ng-show="usernameNotFound" class="bg-danger">That username doesn't exist!</p>
     </div>
   </div>
   <div class="row reg-sec">
     <p>{{registerPrompt}} <button class="btn btn-md btn-default" ng-click="toggleReg()">{{registerBtnTxt}}</button></p>
-    <form name="regForm" class="form-register col-md-4 col-lg-4 col-sm-6" ng-class="{'hide-signin' : !regOpen}">
+    <form name="regForm" class="form-register col-sm-4" ng-class="{'hide-signin' : !regOpen}">
       <h2>Welcome!</h2>
       <label for="inputRegName" class="sr-only">Your name</label>
       <input

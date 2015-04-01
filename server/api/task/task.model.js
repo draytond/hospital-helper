@@ -7,9 +7,8 @@ var TaskSchema = new Schema({
   from: { type: Schema.Types.ObjectId, ref: 'User' },
   to: { type: Schema.Types.ObjectId, ref: 'User' },
   text: String,
-  status: String,
-  created: { type : Date, default: Date.now },
-  finished: Date
+  urgency: String,
+  status: String
 });
 
 module.exports = mongoose.model('Task', TaskSchema);

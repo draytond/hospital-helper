@@ -1,0 +1,45 @@
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <h1>Hospital Helper</h1>
+    <p class="lead">Request center</p>
+  </div>
+</header>
+<div class="container">
+  <h2>Hello {{patient.name}}!</h2>
+  <form>
+    <h3>What do you need?</h3>
+    <label for="to-field">To:</label>
+    <select id="to-field" ng-model="newTask.to">
+      <option ng-value="user.doctor._id">My doctor, {{user.doctor.name}}</option>
+      <option ng-value="user.nurse._id">My nurse, {{user.nurse.name}}</option>
+      <option ng-value="'floor staff'">Patient care assistant (floor staff)</option>
+    </select>
+    <br />
+    <label for="urgency">Urgency:</label>
+    <select id="urgency" ng-model="newTask.urgency">
+      <option ng-value="low">Low (11+ min)</option>
+      <option ng-value="medium">Medium (5-10+ min)</option>
+      <option ng-value="high">High (1-5 min)</option>
+      <option ng-value="immediate">IMMEDIATE</option>
+    </select>
+    <p class="input-group add-new">
+      <input type="text" class="form-control" placeholder="Add a new request here." ng-model="newTask.text">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="addTask()">Add New</button>
+      </span>
+    </p>
+  </form>
+  <div ng-show="tasks.length > 0" class="row">
+    <div class="col-lg-12">
+      <h3 class="page-header">Your outstanding requests:</h3>
+      <ul class="task-list">
+        <li class="{{task.urgency}}" ng-repeat="task in tasks | filter: {from: user._id}">
+          <p class="task-status">Status: {{task.status}}</p>
+          <p class="task-status">Urgency: {{task.urgency}}</p>
+          <p class="task-text">Your message: {{task.text}}</p>
+          <button class="btn btn-default" type="button" ng-click="deleteTask(task)">Cancel / Done</button>
+        </li>
+      </table>
+    </div>
+  </div>
+</ul>
