@@ -9,14 +9,14 @@
   <form>
     <h3>What do you need?</h3>
     <label for="to-field">To:</label>
-    <select id="to-field" ng-model="newTask.to">
+    <select class="form-control" id="to-field" ng-model="newTask.to">
       <option ng-value="user.doctor._id">My doctor, {{user.doctor.name}}</option>
       <option ng-value="user.nurse._id">My nurse, {{user.nurse.name}}</option>
       <option ng-value="'floor staff'">Patient care assistant (floor staff)</option>
     </select>
     <br />
     <label for="urgency">Urgency:</label>
-    <select id="urgency" ng-model="newTask.urgency">
+    <select class="form-control" id="urgency" ng-model="newTask.urgency">
       <option ng-value="low">Low (11+ min)</option>
       <option ng-value="medium">Medium (5-10+ min)</option>
       <option ng-value="high">High (1-5 min)</option>
