@@ -4,6 +4,14 @@ var _ = require('lodash');
 var Task = require('./task.model');
 
 // Get list of tasks
+exports.indexPopulate = function(req, res) {
+  Task.find().populate('from').exec(function (err, tasks) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, tasks);
+  });
+};
+
+// Get list of tasks
 exports.index = function(req, res) {
   Task.find(function (err, tasks) {
     if(err) { return handleError(res, err); }
