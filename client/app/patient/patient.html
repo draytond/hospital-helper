@@ -32,14 +32,7 @@
   <div ng-show="tasks.length > 0" class="row">
     <div class="col-lg-12">
       <h3 class="page-header">Your outstanding requests:</h3>
-      <ul class="task-list">
-        <li class="{{task.urgency}}" ng-repeat="task in tasks | filter: {from: user._id}">
-          <p class="task-status">Status: {{task.status}}</p>
-          <p class="task-status">Urgency: {{task.urgency}}</p>
-          <p class="task-text">Your message: {{task.text}}</p>
-          <button class="btn btn-default" type="button" ng-click="deleteTask(task)">Cancel / Done</button>
-        </li>
-      </ul>
+      <task-list></task-list>
     </div>
   </div>
 </ul>

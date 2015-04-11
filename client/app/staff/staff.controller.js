@@ -15,4 +15,6 @@ angular.module('hospitalHelperApp')
       console.log('tasks: ', $scope.tasks);
       socket.syncUpdates('task', $scope.tasks);
     });
+
+    $scope.theFilter = $rootScope.user._id;
   });

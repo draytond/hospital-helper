@@ -1,0 +1,19 @@
+<ul class="task-list">
+  <li
+    ng-if="user.role === 'staff'"
+    class="{{task.urgency}}"
+    ng-repeat="task in tasks | filter: {to: user._id}">
+    <h4 class="task-status">{{task.from.name}} in room {{task.from.room}} says:</h4>
+    <p class="task-text">{{task.text}}</p>
+    <p class="task-status">Urgency: {{task.urgency}}</p>
+  </li>
+  <li
+    ng-if="user.role === 'patient'"
+    class="{{task.urgency}}"
+    ng-repeat="task in tasks | filter: {from: user._id}">
+    <p class="task-status">Status: {{task.status}}</p>
+    <p class="task-status">Urgency: {{task.urgency}}</p>
+    <p class="task-text">Your message: {{task.text}}</p>
+    <button class="btn btn-default" type="button" ng-click="deleteTask(task)">Cancel / Done</button>
+  </li>
+</ul>

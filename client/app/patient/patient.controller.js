@@ -30,4 +30,6 @@ angular.module('hospitalHelperApp')
     $scope.deleteTask = function(task) {
       $http.delete('/api/tasks/' + task._id);
     };
+
+    $scope.theFilter = $rootScope.user._id;
   });
