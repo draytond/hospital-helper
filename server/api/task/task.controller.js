@@ -38,6 +38,7 @@ exports.create = function(req, res) {
 
 // Updates an existing task in the DB.
 exports.update = function(req, res) {
+  console.log('UPDATING~~~~~~~~~~~~~~');
   if(req.body._id) { delete req.body._id; }
   Task.findById(req.params.id, function (err, task) {
     if (err) { return handleError(res, err); }

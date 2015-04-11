@@ -1,0 +1,16 @@
+.delegate-select {
+  max-width: 400px;
+
+  &+ button {
+    margin-top: 10px;
+  }
+}
+
+.task-text {
+  font-style: italic;
+  font-size: 1.5em;
+
+  &::before, &::after {
+    content: "\"";
+  }
+}

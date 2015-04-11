@@ -6,6 +6,17 @@
     <h4 class="task-status">{{task.from.name}} in room {{task.from.room}} says:</h4>
     <p class="task-text">{{task.text}}</p>
     <p class="task-status">Urgency: {{task.urgency}}</p>
+    <label for="patient-nurse">Delegate this task:</label>
+    <select
+      ng-model="targetStaff[$index]"
+      class="delegate-select form-control">
+      <option value="{{user._id}}" ng-repeat="user in users | filter: {role: 'staff'}">
+        {{user.name}}
+      </option>
+    </select>
+    <button
+      class="btn btn-default"
+      ng-click="delegateTo(task, targetStaff[$index])">Delegate</button>
   </li>
   <li
     ng-if="user.role === 'patient'"
@@ -13,7 +24,7 @@
     ng-repeat="task in tasks | filter: {from: user._id}">
     <p class="task-status">Status: {{task.status}}</p>
     <p class="task-status">Urgency: {{task.urgency}}</p>
-    <p class="task-text">Your message: {{task.text}}</p>
+    <p>Your message: <span class="task-text">{{task.text}}</span></p>
     <button class="btn btn-default" type="button" ng-click="deleteTask(task)">Cancel / Done</button>
   </li>
 </ul>
