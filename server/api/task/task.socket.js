@@ -16,7 +16,9 @@ exports.register = function(socket) {
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('task:save', doc);
+  Task.populate(doc, 'to from', function(err, task) {
+    socket.emit('task:save', task);
+  });
 }
 
 function onRemove(socket, doc, cb) {

@@ -4,16 +4,8 @@ var _ = require('lodash');
 var Task = require('./task.model');
 
 // Get list of tasks
-exports.indexPopulate = function(req, res) {
-  Task.find().populate('from').exec(function (err, tasks) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, tasks);
-  });
-};
-
-// Get list of tasks
 exports.index = function(req, res) {
-  Task.find(function (err, tasks) {
+  Task.find().populate('from to').exec(function (err, tasks) {
     if(err) { return handleError(res, err); }
     return res.json(200, tasks);
   });
@@ -38,7 +30,6 @@ exports.create = function(req, res) {
 
 // Updates an existing task in the DB.
 exports.update = function(req, res) {
-  console.log('UPDATING~~~~~~~~~~~~~~');
   if(req.body._id) { delete req.body._id; }
   Task.findById(req.params.id, function (err, task) {
     if (err) { return handleError(res, err); }

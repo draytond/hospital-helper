@@ -16,7 +16,7 @@ angular.module('hospitalHelperApp')
       socket.syncUpdates('user', $scope.users);
     });
 
-    $http.get('/api/tasks/populate').success(function(receivedTasks) {
+    $http.get('/api/tasks').success(function(receivedTasks) {
       $scope.tasks = receivedTasks;
       socket.syncUpdates('task', $scope.tasks);
     });
