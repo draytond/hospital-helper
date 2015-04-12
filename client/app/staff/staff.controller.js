@@ -1,33 +1,28 @@
 'use strict';
 
 angular.module('hospitalHelperApp')
-  .controller('StaffCtrl', function ($scope, $http, $rootScope, socket) {
-    $scope.tasks = [];
-    $scope.users = [];
+  .controller('StaffCtrl', function ($scope, $http, $rootScope, socket, Task, User) {
     $scope.targetStaff = [];
     $scope.staffMember = $rootScope.user;
-    $scope.newTask = {
-      from: $rootScope.user._id,
-      status: 'open'
-    };
 
-    $http.get('/api/users').success(function(receivedUsers) {
-      $scope.users = receivedUsers;
+    $scope.users = User.query(function() {
       socket.syncUpdates('user', $scope.users);
     });
 
-    $http.get('/api/tasks').success(function(receivedTasks) {
-      $scope.tasks = receivedTasks;
+    $scope.tasks = Task.query(function() {
       socket.syncUpdates('task', $scope.tasks);
     });
 
     $scope.delegateTo = function(delegatedTask, sendToTarget) {
-      delegatedTask.from = delegatedTask.from._id;
-      delegatedTask.to = sendToTarget;
-      $http.put('/api/tasks/' + delegatedTask._id, delegatedTask)
-        .success(function(receivedTasks) {
-          console.log('task: ', delegatedTask);
-          socket.syncUpdates('task', $scope.tasks);
-        });
+      if (!delegatedTask || !sendToTarget) {
+        return;
+      } else {
+        delegatedTask.from = delegatedTask.from._id;
+        delegatedTask.to = sendToTarget;
+        $http.put('/api/tasks/' + delegatedTask._id, delegatedTask)
+          .success(function() {
+            socket.syncUpdates('task', $scope.tasks);
+          });
+      }
     };
   });

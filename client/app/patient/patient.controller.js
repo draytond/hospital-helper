@@ -1,18 +1,16 @@
 'use strict';
 
 angular.module('hospitalHelperApp')
-  .controller('PatientCtrl', function ($scope, $http, $rootScope, socket) {
+  .controller('PatientCtrl', function ($scope, $http, $rootScope, socket, Task) {
+    //console.log('factory answer of life: ', task.someMethod());
     $scope.tasks = []
     $scope.newTask = {
       from: $rootScope.user._id,
       status: 'open'
     };
-    console.log('the user on the rootscope is: ', $rootScope.user);
     $scope.patient = $rootScope.user;
 
-    $http.get('/api/tasks').success(function(receivedTasks) {
-      $scope.tasks = receivedTasks;
-      console.log('tasks: ', $scope.tasks);
+    $scope.tasks = Task.query(function() {
       socket.syncUpdates('task', $scope.tasks);
     });
 
