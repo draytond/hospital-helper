@@ -1,7 +1,7 @@
 <ul class="task-list">
   <li
     ng-if="user.role === 'staff'"
-    class="{{task.urgency}}"
+    class="{{task.urgency}} staff"
     ng-repeat="task in tasks | filter: {to: {_id: user._id}}">
     <h4 class="task-status">{{task.from.name}} in room {{task.from.room}} says:</h4>
     <p class="task-text">{{task.text}}</p>
@@ -20,7 +20,8 @@
   </li>
   <li
     ng-if="user.role === 'patient'"
-    class="{{task.urgency}}"
+    ng-animate="'animate'"
+    class="{{task.urgency}} patient"
     ng-repeat="task in tasks | filter: {from: {_id: user._id}}">
     <p class="task-status">Status: {{task.status}}</p>
     <p class="task-status">Urgency: {{task.urgency}}</p>

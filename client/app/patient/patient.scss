@@ -1,31 +1,3 @@
-.task-list {
-  list-style: none;
-  padding-left: 0;
-
-  li {
-    border:solid 2px #707070;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    padding: 13px;
-    margin-bottom: 15px;
-
-    &.Low {
-      background-color: rgb(224, 255, 224);
-    }
-    &.Medium {
-      background-color: #eea236;
-    }
-    &.High {
-      background-color: rgb(223, 44, 44);
-    }
-    &.IMMEDIATE {
-      background-color: black;
-      color: white;
-    }
-  }
-}
-
 .add-new {
   margin-top: 15px;
 }
